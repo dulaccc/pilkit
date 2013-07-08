@@ -1,6 +1,7 @@
 from pilkit.exceptions import UnknownFormat, UnknownExtension
-from pilkit.utils import extension_to_format, format_to_extension
+from pilkit.utils import extension_to_format, format_to_extension, dominant_color
 from nose.tools import eq_, raises
+from .utils import create_image
 
 
 def test_extension_to_format():
@@ -34,3 +35,8 @@ def test_default_extension():
 
     """
     eq_(format_to_extension('JPEG'), '.jpg')
+
+
+def test_dominant_color():
+    dominant = dominant_color(create_image())
+    eq_(dominant, (180, 99, 106))

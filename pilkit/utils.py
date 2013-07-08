@@ -299,3 +299,14 @@ def process_image(img, processors=None, format=None, autoconvert=True, options=N
     format = format or img.format or original_format or 'JPEG'
     options = options or {}
     return img_to_fobj(img, format, autoconvert, **options)
+
+
+def dominant_color(img):
+    """
+    Return the dominant color tuple (R,G,B) for the given image
+
+    NB: We could maybe enhance the result by using a clustering algorithm
+        like describe http://stackoverflow.com/questions/3241929/python-find-dominant-most-common-color-in-an-image
+    """
+    dominant_pixel = img.resize((1,1), Image.ANTIALIAS).getpixel((0,0))
+    return dominant_pixel
